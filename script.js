@@ -18,7 +18,11 @@ const CONFIG = {
 // apply links
 const map = {sx:'x', stt:'tt', sdex:'dex', uniswapBig:'uni', wcX:'x', wcTT:'tt', wcDex:'dex', fX:'x', fTT:'tt', fDex:'dex'};
 Object.entries(map).forEach(([id,key]) => { const el = document.getElementById(id); if (el) el.href = CONFIG.links[key] || '#'; });
-document.querySelectorAll('#caValue, #caValueBig').forEach(el => { if (el) el.textContent = CONFIG.ca; });
+const caShort = (a) => a.length > 14 ? `${a.slice(0,6)}…${a.slice(-4)}` : a;
+{
+  const v = document.getElementById('caValue');     if (v) v.textContent = caShort(CONFIG.ca);
+  const vb = document.getElementById('caValueBig'); if (vb) vb.textContent = CONFIG.ca;
+}
 
 // ---------- TICKER ----------
 const TICKER_ITEMS = [
