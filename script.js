@@ -6,18 +6,17 @@
 (() => {
 
 const CONFIG = {
-  ca: 'CA · coming soon',
+  ca: '0x2a6fBe72bf2bb57383f2C0cA6884454c8E6197A2',
   links: {
     x: 'https://x.com/ethpibble',
     tt: 'https://www.tiktok.com/@pibblefluencer',
-    tg: '#',
-    dex: '#',
-    uni: '#'
+    dex: 'https://dexscreener.com/ethereum/0x2a6fBe72bf2bb57383f2C0cA6884454c8E6197A2',
+    uni: 'https://app.uniswap.org/swap?outputCurrency=0x2a6fBe72bf2bb57383f2C0cA6884454c8E6197A2'
   }
 };
 
 // apply links
-const map = {sx:'x', stt:'tt', stg:'tg', sdex:'dex', uniswapBig:'uni', wcX:'x', wcTT:'tt', wcTG:'tg', fX:'x', fTT:'tt', fTG:'tg'};
+const map = {sx:'x', stt:'tt', sdex:'dex', uniswapBig:'uni', wcX:'x', wcTT:'tt', wcDex:'dex', fX:'x', fTT:'tt', fDex:'dex'};
 Object.entries(map).forEach(([id,key]) => { const el = document.getElementById(id); if (el) el.href = CONFIG.links[key] || '#'; });
 document.querySelectorAll('#caValue, #caValueBig').forEach(el => { if (el) el.textContent = CONFIG.ca; });
 
