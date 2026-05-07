@@ -90,24 +90,27 @@ const muteBtn = document.getElementById('muteBtn');
 if (audio && muteBtn) {
   audio.volume = .5;
   audio.loop = true;
-  let started = false;
+  muteBtn.classList.add('playing');
+  muteBtn.textContent = 'Ⅱ';
+  muteBtn.title = 'stop song';
   const updateBtn = () => {
     const p = !audio.paused;
     muteBtn.classList.toggle('playing', p);
     muteBtn.textContent = p ? 'Ⅱ' : '♪';
+    muteBtn.title = p ? 'stop song' : 'play song';
   };
   audio.addEventListener('play', updateBtn);
   audio.addEventListener('pause', updateBtn);
   muteBtn.addEventListener('click', async () => {
-    if (audio.paused) { try { await audio.play(); started = true; } catch {} }
+    if (audio.paused) { try { await audio.play(); } catch {} }
     else { audio.pause(); }
   });
-  document.addEventListener('pointerdown', async () => {
-    if (audio.paused && !started) {
-      started = true;
-      try { await audio.play(); } catch {}
-    }
-  }, { once: true });
+  const tryPlay = async () => { try { await audio.play(); } catch {} };
+  tryPlay();
+  const kick = () => { if (audio.paused) tryPlay(); };
+  ['pointerdown','keydown','touchstart','scroll'].forEach(ev =>
+    document.addEventListener(ev, kick, { once: true, passive: true })
+  );
 }
 
 // =====================================================
