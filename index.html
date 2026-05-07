@@ -4,9 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>$PIBBLE — small dog, giant wave</title>
-<meta name="description" content="Pibble is the sunny little internet dog riding a turquoise wave with dolphins. 75M+ TikTok views. The patron saint of surfboard energy. ETH only." />
+<meta name="description" content="Pibble. Small dog. Giant wave. 75M+ TikTok views. The patron saint of surfboard energy. ETH only." />
 <meta property="og:title" content="$PIBBLE — small dog, giant wave" />
-<meta property="og:description" content="Pibble is the sunny little internet dog riding a turquoise wave with dolphins. 75M+ TikTok views." />
+<meta property="og:description" content="Small dog. Giant wave. The patron saint of surfboard energy. ETH only." />
 <meta property="og:image" content="assets/pibble-hero.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="assets/pibble-hero.png" />
@@ -14,17 +14,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Bungee&family=Bungee+Shade&family=Inter:wght@600;700;800;900&family=Caveat+Brush&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=2" />
+<link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
 
-<!-- floating ambient stickers (decorative) -->
-<div class="ambient" aria-hidden="true">
-  <img class="amb a1" src="assets/stickers/03.png" alt="" />
-  <img class="amb a2" src="assets/stickers/01.png" alt="" />
-  <img class="amb a3" src="assets/stickers/06.png" alt="" />
-</div>
+<!-- ============== OCEAN CANVAS (full-screen, cursor-reactive) ============== -->
+<canvas id="ocean" aria-hidden="true"></canvas>
 
+<!-- ============== BUBBLE CURSOR TRAIL ============== -->
+<canvas id="bubbles" aria-hidden="true"></canvas>
+
+<!-- ============== PIBBLE PARALLAX FIELD ============== -->
+<div id="pibbleField" aria-hidden="true"></div>
+
+<!-- ============== TOPBAR ============== -->
 <header class="topbar" id="topbar">
   <a class="brand" href="#home">
     <img class="brand-mark" src="assets/stickers/04.png" alt="Pibble" />
@@ -39,8 +42,8 @@
   </div>
 
   <nav class="socials">
-    <a id="sx" class="sbtn sbtn-x" href="https://x.com/ethpibble" target="_blank" rel="noopener" title="X">𝕏</a>
-    <a id="stt" class="sbtn sbtn-tt" href="https://www.tiktok.com/@pibblefluencer" target="_blank" rel="noopener" title="TikTok">TT</a>
+    <a id="sx" class="sbtn sbtn-x" href="#" target="_blank" rel="noopener" title="X">𝕏</a>
+    <a id="stt" class="sbtn sbtn-tt" href="#" target="_blank" rel="noopener" title="TikTok">TT</a>
     <a id="stg" class="sbtn sbtn-tg" href="#" target="_blank" rel="noopener" title="Telegram">TG</a>
     <a id="sdex" class="sbtn" href="#" target="_blank" rel="noopener" title="DexScreener">DEX</a>
     <a id="sbuy" class="sbtn sbtn-buy" href="#buy" title="Buy">▸ BUY</a>
@@ -50,16 +53,9 @@
 
 <main>
 
-<!-- ================ HERO ================ -->
+<!-- ============== HERO ============== -->
 <section class="hero" id="home">
-  <div class="hero-sky" aria-hidden="true">
-    <div class="sun"><div class="sun-rays"></div><div class="sun-core"></div></div>
-    <div class="cloud c1"></div>
-    <div class="cloud c2"></div>
-    <div class="cloud c3"></div>
-  </div>
-
-  <div class="hero-grid">
+  <div class="hero-inner">
     <div class="hero-copy">
       <div class="eyebrow">◆ pibble mode online</div>
       <h1 class="hero-title">
@@ -67,8 +63,8 @@
         <span class="line line-2">GIANT WAVE.</span>
       </h1>
       <p class="hero-lede">
-        Pibble is the sunny little internet dog riding a turquoise wave with dolphins, set to Milky's <i>Just The Way You Are</i>.
-        <b>75M+ views.</b> One small dog. One giant ocean. Zero explanations.
+        The sunny little internet dog riding a turquoise wave with dolphins.
+        <b>75M+ views.</b> Set to Milky's <i>Just The Way You Are</i>.
       </p>
       <div class="hero-stats">
         <div class="stat"><b>75M+</b><span>views</span></div>
@@ -77,61 +73,69 @@
       </div>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#buy">▸ BUY $PIBBLE</a>
-        <a class="btn btn-ghost" href="#video">▶ WATCH HIM SURF</a>
+        <a class="btn btn-ghost" href="#video">▶ WATCH HIM</a>
       </div>
     </div>
 
-    <div class="hero-art">
-      <img class="hero-img" src="assets/pibble-hero.png" alt="Pibble surfing a turquoise wave with dolphins" />
-      <img class="floater f-cheer" src="assets/stickers/01.png" alt="" aria-hidden="true" />
-      <img class="floater f-flag" src="assets/stickers/04.png" alt="" aria-hidden="true" />
+    <div class="hero-portal">
+      <div class="portal-frame">
+        <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/pibble-hero.png">
+          <source src="assets/pibble-hero.mp4" type="video/mp4">
+        </video>
+        <div class="portal-shine"></div>
+        <div class="portal-reflection"></div>
+      </div>
+      <img class="portal-stick portal-stick-1" src="assets/stickers/04.png" alt="" />
+      <img class="portal-stick portal-stick-2" src="assets/stickers/01.png" alt="" />
     </div>
   </div>
 
   <a class="hero-scroll" href="#video">▼ scroll · catch the wave</a>
 </section>
 
-<!-- wave divider -->
-<svg class="wave-div" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0 40 Q 150 0, 300 40 T 600 40 T 900 40 T 1200 40 V 80 H 0 Z" fill="#fff263"/>
-</svg>
+<!-- wave divider (animated) -->
+<div class="wave-band wave-yellow">
+  <svg viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
+    <path id="wavePath1" d="M0 40 Q 150 0, 300 40 T 600 40 T 900 40 T 1200 40 V 80 H 0 Z" />
+  </svg>
+</div>
 
-<!-- ================ TICKER ================ -->
+<!-- ============== TICKER ============== -->
 <section class="ticker" aria-label="Pibble catchphrases">
   <div class="ticker-track" id="tickerTrack"></div>
 </section>
 
-<!-- ================ WATCH DECK ================ -->
+<!-- ============== WATCH ============== -->
 <section class="watch" id="video">
   <div class="section-head">
     <div class="eyebrow">◆ exhibit A</div>
     <h2>WATCH THE LITTLE GUY</h2>
-    <p class="section-sub">Pibble does not explain the vibe. Pibble is the vibe. Press play.</p>
+    <p class="section-sub">Press play. Pibble does the rest.</p>
   </div>
 
   <div class="video-shell">
-    <video class="hero-video" controls preload="metadata" playsinline poster="assets/pibble-hero.png">
+    <video controls preload="metadata" playsinline poster="assets/pibble-hero.png">
       <source src="assets/pibble-reference.mp4#t=0.1" type="video/mp4">
     </video>
-    <div class="video-corner-sticker"><img src="assets/stickers/06.png" alt=""/></div>
+    <div class="video-corner"><img src="assets/stickers/06.png" alt=""/></div>
   </div>
 
   <div class="watch-cards">
-    <a class="watch-card wc-x" href="https://x.com/ethpibble" target="_blank" rel="noopener">
+    <a class="watch-card wc-x" id="wcX" href="#" target="_blank" rel="noopener">
       <span class="wc-logo"><img src="assets/x-logo.webp" alt="X"/></span>
       <span class="wc-tag">official X</span>
       <h3>follow the wave</h3>
-      <p>where pibble announces. where pibble lives.</p>
+      <p>where pibble lives. where pibble announces.</p>
       <span class="wc-arrow">→</span>
     </a>
-    <a class="watch-card wc-tt" href="https://www.tiktok.com/@pibblefluencer" target="_blank" rel="noopener">
+    <a class="watch-card wc-tt" id="wcTT" href="#" target="_blank" rel="noopener">
       <span class="wc-logo"><img src="assets/tiktok-logo.webp" alt="TikTok"/></span>
       <span class="wc-tag">TikTok</span>
       <h3>pibblefluencer</h3>
       <p>75M+ views. one small dog. one giant ocean.</p>
       <span class="wc-arrow">→</span>
     </a>
-    <a class="watch-card wc-tg" href="#" target="_blank" rel="noopener">
+    <a class="watch-card wc-tg" id="wcTG" href="#" target="_blank" rel="noopener">
       <span class="wc-logo"><img src="assets/telegram-logo.webp" alt="Telegram"/></span>
       <span class="wc-tag">Telegram</span>
       <h3>the surf club</h3>
@@ -141,78 +145,55 @@
   </div>
 </section>
 
-<!-- wave divider -->
-<svg class="wave-div flip" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0 40 Q 150 0, 300 40 T 600 40 T 900 40 T 1200 40 V 80 H 0 Z" fill="#16e7dc"/>
-</svg>
+<div class="wave-band wave-cyan">
+  <svg viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
+    <path id="wavePath2" d="M0 40 Q 150 0, 300 40 T 600 40 T 900 40 T 1200 40 V 80 H 0 Z" />
+  </svg>
+</div>
 
-<!-- ================ THE PIBBLE PACK ================ -->
+<!-- ============== THE PACK ============== -->
 <section class="pack" id="pack">
   <div class="section-head">
     <div class="eyebrow">◆ the pack</div>
-    <h2>TEN MOODS. ONE DOG.</h2>
-    <p class="section-sub">Right-click any sticker → save. They're yours. Use them in your group chats. Make us famous.</p>
+    <h2>THIRTY-ONE MOODS.<br/>ONE DOG.</h2>
+    <p class="section-sub">Right-click any sticker → save. Use them in your group chats. Make us famous.</p>
   </div>
-
-  <div class="sticker-grid" id="stickerGrid">
-    <!-- populated by JS -->
-  </div>
+  <div class="sticker-grid" id="stickerGrid"></div>
 </section>
 
-<!-- wave divider -->
-<svg class="wave-div" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0 40 Q 150 0, 300 40 T 600 40 T 900 40 T 1200 40 V 80 H 0 Z" fill="#ff7aa8"/>
-</svg>
+<div class="wave-band wave-pink">
+  <svg viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
+    <path id="wavePath3" d="M0 40 Q 150 0, 300 40 T 600 40 T 900 40 T 1200 40 V 80 H 0 Z" />
+  </svg>
+</div>
 
-<!-- ================ THE CODE ================ -->
+<!-- ============== THE CODE ============== -->
 <section class="code" id="code">
   <div class="section-head">
     <div class="eyebrow">◆ the pibble code</div>
     <h2>5 STEPS TO SURF</h2>
   </div>
-
   <ol class="code-list">
-    <li class="code-step">
-      <img class="step-stick" src="assets/stickers/06.png" alt=""/>
-      <div class="step-num">1</div>
-      <div class="step-text">FIND SUNNY PATCH.<br/><small>turquoise water optional. ideal but optional.</small></div>
-    </li>
-    <li class="code-step">
-      <img class="step-stick" src="assets/stickers/03.png" alt=""/>
-      <div class="step-num">2</div>
-      <div class="step-text">SUMMON TINY DOG.<br/><small>he is already on his way. he was always on his way.</small></div>
-    </li>
-    <li class="code-step">
-      <img class="step-stick" src="assets/stickers/02.png" alt=""/>
-      <div class="step-num">3</div>
-      <div class="step-text">CATCH THE BIG TURQUOISE WAVE.<br/><small>do not look down. do not look back.</small></div>
-    </li>
-    <li class="code-step">
-      <img class="step-stick" src="assets/stickers/05.png" alt=""/>
-      <div class="step-num">4</div>
-      <div class="step-text">LET THE DOLPHINS CONFIRM.<br/><small>two flips minimum. they know the protocol.</small></div>
-    </li>
-    <li class="code-step">
-      <img class="step-stick" src="assets/stickers/10.png" alt=""/>
-      <div class="step-num">5</div>
-      <div class="step-text">REPEAT UNTIL THE INTERNET IS HEALED.<br/><small>the internet is not healed yet. you have work to do.</small></div>
-    </li>
+    <li class="code-step"><img class="step-stick" src="assets/stickers/06.png" alt=""/><div class="step-num">1</div><div class="step-text">FIND SUNNY PATCH.<br/><small>turquoise water optional. ideal but optional.</small></div></li>
+    <li class="code-step"><img class="step-stick" src="assets/stickers/03.png" alt=""/><div class="step-num">2</div><div class="step-text">SUMMON TINY DOG.<br/><small>he is already on his way. he was always on his way.</small></div></li>
+    <li class="code-step"><img class="step-stick" src="assets/stickers/02.png" alt=""/><div class="step-num">3</div><div class="step-text">CATCH THE BIG TURQUOISE WAVE.<br/><small>do not look down. do not look back.</small></div></li>
+    <li class="code-step"><img class="step-stick" src="assets/stickers/05.png" alt=""/><div class="step-num">4</div><div class="step-text">LET THE DOLPHINS CONFIRM.<br/><small>two flips minimum. they know the protocol.</small></div></li>
+    <li class="code-step"><img class="step-stick" src="assets/stickers/10.png" alt=""/><div class="step-num">5</div><div class="step-text">REPEAT UNTIL THE INTERNET IS HEALED.<br/><small>the internet is not healed yet. you have work to do.</small></div></li>
   </ol>
 </section>
 
-<!-- wave divider -->
-<svg class="wave-div flip" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0 40 Q 150 0, 300 40 T 600 40 T 900 40 T 1200 40 V 80 H 0 Z" fill="#fff263"/>
-</svg>
+<div class="wave-band wave-yellow">
+  <svg viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
+    <path id="wavePath4" d="M0 40 Q 150 0, 300 40 T 600 40 T 900 40 T 1200 40 V 80 H 0 Z" />
+  </svg>
+</div>
 
-<!-- ================ TOKENOMICS ================ -->
+<!-- ============== TOKENOMICS ============== -->
 <section class="tokenomics" id="tokenomics">
   <div class="section-head">
-    <div class="eyebrow">◆ the boring part</div>
-    <h2>WAVE-CERTIFIED.</h2>
-    <p class="section-sub">No team wallets. No promises. Just a small dog and a big ocean.</p>
+    <div class="eyebrow">◆ wave-certified</div>
+    <h2>NO TEAM. ONLY WAVE.</h2>
   </div>
-
   <div class="token-grid">
     <div class="token-card tc-1"><div class="tc-num">0%</div><div class="tc-lbl">tax · buy &amp; sell</div></div>
     <div class="token-card tc-2"><div class="tc-num">100%</div><div class="tc-lbl">LP burned</div></div>
@@ -221,31 +202,17 @@
   </div>
 </section>
 
-<!-- ================ HOW TO BUY ================ -->
+<!-- ============== BUY ============== -->
 <section class="buy" id="buy">
   <div class="section-head">
     <div class="eyebrow">◆ catch the wave</div>
     <h2>HOW TO RIDE</h2>
   </div>
-
   <div class="buy-grid">
-    <div class="buy-step">
-      <div class="bs-num">01</div>
-      <h3>GET ETH</h3>
-      <p>any wallet. metamask, rainbow, phantom. doesn't matter. pibble is patient.</p>
-    </div>
-    <div class="buy-step">
-      <div class="bs-num">02</div>
-      <h3>COPY THE CA</h3>
-      <p>tap the contract above. paste it into uniswap. confirm.</p>
-    </div>
-    <div class="buy-step">
-      <div class="bs-num">03</div>
-      <h3>SURF</h3>
-      <p>that's it. you are now on the wave. pibble approves.</p>
-    </div>
+    <div class="buy-step"><div class="bs-num">01</div><h3>GET ETH</h3><p>any wallet. metamask, rainbow, phantom. pibble is patient.</p></div>
+    <div class="buy-step"><div class="bs-num">02</div><h3>COPY THE CA</h3><p>tap the contract above. paste it into uniswap. confirm.</p></div>
+    <div class="buy-step"><div class="bs-num">03</div><h3>SURF</h3><p>that's it. you are now on the wave. pibble approves.</p></div>
   </div>
-
   <div class="buy-cta">
     <div class="buy-ca">
       <span class="buy-ca-label">contract</span>
@@ -256,7 +223,7 @@
   </div>
 </section>
 
-<!-- ================ QUOTE ================ -->
+<!-- ============== QUOTE ============== -->
 <section class="quote-section">
   <div class="quote-card">
     <p class="quote-text">"PIBBLE DOES NOT EXPLAIN THE VIBE. PIBBLE IS THE VIBE."</p>
@@ -266,22 +233,21 @@
 
 </main>
 
-<!-- ================ FOOTER ================ -->
 <footer class="footer">
   <div class="footer-inner">
     <img class="footer-mark" src="assets/stickers/04.png" alt="Pibble"/>
     <div class="footer-mantra">SMALL DOG.<br/>GIANT WAVE.</div>
     <div class="footer-line">© 2026 Pibble Department of Wave-Based Financial Advice.<br/>not financial advice. not investment advice. just dolphins.</div>
     <div class="footer-socials">
-      <a href="https://x.com/ethpibble" target="_blank" rel="noopener">X</a>
-      <a href="https://www.tiktok.com/@pibblefluencer" target="_blank" rel="noopener">TIKTOK</a>
-      <a href="#" target="_blank" rel="noopener">TELEGRAM</a>
+      <a id="fX" href="#" target="_blank" rel="noopener">X</a>
+      <a id="fTT" href="#" target="_blank" rel="noopener">TIKTOK</a>
+      <a id="fTG" href="#" target="_blank" rel="noopener">TELEGRAM</a>
     </div>
   </div>
 </footer>
 
 <audio id="pibbleAudio" preload="auto" src="assets/pibble-song.mp3" loop></audio>
 
-<script src="script.js?v=2"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>
